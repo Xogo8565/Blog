@@ -1,5 +1,6 @@
 package com.play.blog.auth;
 
+import com.play.blog.entity.Member;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 
 import java.util.Map;
@@ -7,18 +8,13 @@ import java.util.Map;
 public class GoogleAuthInfo implements OAuth2UserInfo {
     private final Map<String, Object> attributes;
 
-    public GoogleAuthInfo (OAuth2User oAuth2User){
-        this.attributes =   oAuth2User.getAttributes();
+    public GoogleAuthInfo (Map<String, Object> attributes){
+        this.attributes =   attributes;
     }
 
     @Override
     public String getProviderId() {
         return (String) attributes.get("sub");
-    }
-
-    @Override
-    public String getProvider() {
-        return ProviderType.GOOGLE.getValue();
     }
 
     @Override
@@ -40,4 +36,5 @@ public class GoogleAuthInfo implements OAuth2UserInfo {
     public Map<String, Object> getAttributes() {
         return this.attributes;
     }
+
 }
